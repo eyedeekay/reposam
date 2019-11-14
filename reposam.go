@@ -8,8 +8,7 @@ import (
 
 	"github.com/eyedeekay/sam-forwarder/interface"
 	"github.com/eyedeekay/sam-forwarder/tcp"
-	//"github.com/jcelliott/lumber"
-	//"github.com/schollz/cowyo/server"
+	"github.com/geek1011/repogen"
 )
 
 func GenerateRandomBytes(n int) ([]byte, error) {
@@ -30,6 +29,7 @@ func GenerateRandomBytes(n int) ([]byte, error) {
 //a local service to i2p over the SAM API.
 type RepoSam struct {
 	*samforwarder.SAMForwarder
+	*repogen.Repo
 	password string
 	ServeDir string
 	up       bool

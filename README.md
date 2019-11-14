@@ -1,24 +1,20 @@
-CowYoSam
-========
+RepoSAM
+=======
 
-A zero-configuration wiki for I2P based on
-[cowyo](https://github.com/schollz/cowyo) and sam-forwarder. Works as an
-alternative launcher for a cowyo wiki that automatically forwards it to I2P.
-
-Or something I should probably have not done between the hours of noon and 1PM
-on Wednesday, November 6th.
+A self-configuring Debian repository for I2P based on
+[cowyo](https://github.com/geek1011/repogen) and sam-forwarder. Works as an
+alternative launcher for a repogen apt server that automatically forwards it to
+I2P.
 
 Compile/Installation
 ====================
 
-[cowyo](https://github.com/schollz/cowyo) is sort of like what you'd get if you crossed a wiki and a pastebin.
-Anyone can edit, anonymously, in the default configuration. For now, I have
-disabled file uploads and some some other features are non-configurable. I will
-add them back in soon.
+[repogen](https://github.com/geek1011/repogen) is an apt repository management
+tool with a web interface.
 
 With your GOPATH set:
 
-        git clone https://github.com/eydeekay/cowyosam $GOPATH/src/github.com/eyedeekay/cowyosam
-        cd $GOPATH/src/github.com/eyedeekay/cowyosam
+        git clone https://github.com/eydeekay/reposam $GOPATH/src/github.com/eyedeekay/reposam
+        cd $GOPATH/src/github.com/eyedeekay/reposam
         make
         sudo make install

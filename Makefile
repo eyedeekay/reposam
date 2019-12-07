@@ -14,7 +14,7 @@ readme:
 	@echo '' | tee -a README.md
 	@echo '' | tee -a README.md
 	@echo '' | tee -a README.md
-	./reposam/reposam -h 2>&1 | sed 's|  |        |g' | tee -a README.md
+	./reposam/reposam -h 2>&1 | sed 's|  |         |g' | sed 's|                	|            |g' | sed 's|Usage|        Usage|g' |tee -a README.md
 
 install:
 	install -m755 reposam/reposam /usr/local/bin

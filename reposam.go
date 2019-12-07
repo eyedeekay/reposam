@@ -4,6 +4,7 @@ import (
 	"crypto/rand"
 	"golang.org/x/crypto/bcrypt"
 	"log"
+	"net/http"
 
 	"github.com/eyedeekay/sam-forwarder/interface"
 	"github.com/eyedeekay/sam-forwarder/tcp"
@@ -65,6 +66,9 @@ func (f *RepoSam) Serve() error {
 		if err = f.Repo.ServeRepo(f.watch, true, f.privateKey, f.inRoot, f.outRoot, f.watchInterval); err != nil {
 			return err
 		}
+		fs := http.FileServer(http.Dir(f.outRoot))
+		http.Handle("/", fs)
+		http.ListenAndServe(f.Target(), nil)
 	}
 	return nil
 }

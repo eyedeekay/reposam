@@ -37,6 +37,8 @@ type RepoSam struct {
 	origin             string
 	description        string
 	privateKey         []byte
+	watch              bool
+	watchInterval      int
 
 	password string
 	//	ServeDir           string
@@ -60,7 +62,9 @@ func (f *RepoSam) ServeParent() {
 func (f *RepoSam) Serve() error {
 	go f.ServeParent()
 	if f.Up() {
-
+		if err = f.Repo.ServeRepo(f.watch, true, f.privateKey, f.inRoot, f.outRoot, f.watchInterval); err != nil {
+			return err
+		}
 	}
 	return nil
 }

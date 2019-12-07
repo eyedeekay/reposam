@@ -170,6 +170,8 @@ func main() {
 		reposam.SetOrigin(*origin),
 		reposam.SetDescription(*description),
 		reposam.SetPrivateKey(buf),
+		reposam.SetWatch(*watch),
+		reposam.SetWatchInterval(*watchInterval),
 	)
 	if err != nil {
 		log.Fatal(err)

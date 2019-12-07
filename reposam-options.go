@@ -497,3 +497,19 @@ func SetGenContents(b bool) func(*RepoSam) error {
 		return nil
 	}
 }
+
+//SetWatch tells the connection to close it's tunnels during extended idle time.
+func SetWatch(b bool) func(*RepoSam) error {
+	return func(c *RepoSam) error {
+		c.watch = b
+		return nil
+	}
+}
+
+//SetWatchInterval tells the connection to close it's tunnels during extended idle time.
+func SetWatchInterval(b int) func(*RepoSam) error {
+	return func(c *RepoSam) error {
+		c.watchInterval = b
+		return nil
+	}
+}

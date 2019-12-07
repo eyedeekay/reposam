@@ -1,10 +1,13 @@
 
 GO111MODULE=on
 
-build:
+build: fmt
 	go build -tags netgo \
 		-ldflags '-w -extldflags "-static"' \
-		-o reposam/reposam
+		-o reposam/reposam ./reposam
+
+try: build
+	cd tmp && ../reposam/reposam
 
 install:
 	install -m755 reposam/reposam /usr/local/bin

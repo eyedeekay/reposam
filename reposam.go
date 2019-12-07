@@ -4,7 +4,6 @@ import (
 	"crypto/rand"
 	"golang.org/x/crypto/bcrypt"
 	"log"
-	//"strings"
 
 	"github.com/eyedeekay/sam-forwarder/interface"
 	"github.com/eyedeekay/sam-forwarder/tcp"
@@ -30,9 +29,18 @@ func GenerateRandomBytes(n int) ([]byte, error) {
 type RepoSam struct {
 	*samforwarder.SAMForwarder
 	*repogen.Repo
+
+	inRoot             string
+	outRoot            string
+	generateContents   bool
+	maintainerOverride string
+	origin             string
+	description        string
+	privateKey         []byte
+
 	password string
-	ServeDir string
-	up       bool
+	//	ServeDir           string
+	up bool
 }
 
 var err error
@@ -52,45 +60,7 @@ func (f *RepoSam) ServeParent() {
 func (f *RepoSam) Serve() error {
 	go f.ServeParent()
 	if f.Up() {
-		/*sec, err := GenerateRandomBytes(256)
-		if err != nil {
-			return err
-		}
-		hostport := strings.SplitN(f.Target(), ":", 2)
-		log.Println("Starting web server", f.Target())*/
-		/*server.Serve(
-			f.ServeDir,
-			hostport[0],
-			hostport[1],
-			//c.GlobalString("cert"),
-			//c.GlobalString("key"),
-			//TLS,
-			"",
-			"",
-			false,
-			//c.GlobalString("css"),
-			//c.GlobalString("default-page"),
-			"",
-			"",
-			//c.GlobalString("lock"),
-			"",
-			//c.GlobalInt("debounce"),
-			5000,
-			//c.GlobalBool("diary"),
-			true,
-			string(sec),
-			//c.GlobalString("access-code"),
-			f.password,
-			//c.GlobalBool("allow-insecure-markup"),
-			false,
-			//c.GlobalBool("allow-file-uploads"),
-			//c.GlobalUint("max-upload-mb"),
-			false,
-			0,
-			//c.GlobalUint("max-document-length"),
-			100000000,
-			logger(false),
-		)*/
+
 	}
 	return nil
 }
@@ -121,6 +91,11 @@ func (s *RepoSam) Load() (samtunnel.SAMTunnel, error) {
 		return nil, e
 	}
 	s.SAMForwarder = f.(*samforwarder.SAMForwarder)
+	var err error
+	s.Repo, err = repogen.NewRepo(s.inRoot, s.outRoot, s.generateContents, s.maintainerOverride, s.origin, s.description, string(s.privateKey))
+	if err != nil {
+		return nil, err
+	}
 	s.up = true
 	log.Println("Finished putting tunnel up")
 	return s, nil

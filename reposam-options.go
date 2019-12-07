@@ -214,18 +214,6 @@ func SetEncrypt(b bool) func(*RepoSam) error {
 	}
 }
 
-//SetServeDir sets the path to the directory you want to serve
-func SetServeDir(s string) func(*RepoSam) error {
-	return func(c *RepoSam) error {
-		var err error
-		c.ServeDir, err = filepath.Abs(s)
-		if err != nil {
-			return err
-		}
-		return nil
-	}
-}
-
 //SetLeaseSetKey sets the host of the RepoSam's SAM bridge
 func SetLeaseSetKey(s string) func(*RepoSam) error {
 	return func(c *RepoSam) error {
@@ -442,6 +430,70 @@ func SetAccessList(s []string) func(*RepoSam) error {
 func SetKeyFile(s string) func(*RepoSam) error {
 	return func(c *RepoSam) error {
 		c.SAMForwarder.Config().KeyFilePath = s
+		return nil
+	}
+}
+
+//SetMaintainerOverride sets the maintainer override for the apt repo
+func SetMaintainerOverride(s string) func(*RepoSam) error {
+	return func(c *RepoSam) error {
+		c.maintainerOverride = s
+		return nil
+	}
+}
+
+//SetOrigin sets the maintainer override for the apt repo
+func SetOrigin(s string) func(*RepoSam) error {
+	return func(c *RepoSam) error {
+		c.origin = s
+		return nil
+	}
+}
+
+//SetDescription sets the maintainer override for the apt repo
+func SetDescription(s string) func(*RepoSam) error {
+	return func(c *RepoSam) error {
+		c.description = s
+		return nil
+	}
+}
+
+//SetPrivateKey sets the maintainer override for the apt repo
+func SetPrivateKey(s []byte) func(*RepoSam) error {
+	return func(c *RepoSam) error {
+		c.privateKey = s
+		return nil
+	}
+}
+
+//SetWatchDir sets the path to the directory you want to serve
+func SetWatchDir(s string) func(*RepoSam) error {
+	return func(c *RepoSam) error {
+		var err error
+		c.inRoot, err = filepath.Abs(s)
+		if err != nil {
+			return err
+		}
+		return nil
+	}
+}
+
+//SetServeDir sets the path to the directory you want to serve
+func SetServeDir(s string) func(*RepoSam) error {
+	return func(c *RepoSam) error {
+		var err error
+		c.outRoot, err = filepath.Abs(s)
+		if err != nil {
+			return err
+		}
+		return nil
+	}
+}
+
+//SetCloseIdle tells the connection to close it's tunnels during extended idle time.
+func SetGenContents(b bool) func(*RepoSam) error {
+	return func(c *RepoSam) error {
+		c.generateContents = b
 		return nil
 	}
 }

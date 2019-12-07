@@ -2,7 +2,7 @@ RepoSAM
 =======
 
 A self-configuring Debian repository for I2P based on
-[cowyo](https://github.com/geek1011/repogen) and sam-forwarder. Works as an
+[repogen](https://github.com/geek1011/repogen) and sam-forwarder. Works as an
 alternative launcher for a repogen apt server that automatically forwards it to
 I2P.
 

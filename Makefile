@@ -1,13 +1,20 @@
 
 GO111MODULE=on
 
-build: fmt
+build: fmt readme
 	go build -tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o reposam/reposam ./reposam
 
 try: build
 	cd tmp && ../reposam/reposam
+
+readme:
+	cat .readme.md > README.md
+	@echo '' | tee -a README.md
+	@echo '' | tee -a README.md
+	@echo '' | tee -a README.md
+	./reposam/reposam -h 2>&1 | sed 's|  |        |g' | tee -a README.md
 
 install:
 	install -m755 reposam/reposam /usr/local/bin

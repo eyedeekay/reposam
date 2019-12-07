@@ -7,7 +7,7 @@ alternative launcher for a repogen apt server that automatically forwards it to
 I2P.
 
 Compile/Installation
-====================
+--------------------
 
 [repogen](https://github.com/geek1011/repogen) is an apt repository management
 tool with a web interface.
@@ -18,6 +18,9 @@ With your GOPATH set:
         cd $GOPATH/src/github.com/eyedeekay/reposam
         make
         sudo make install
+
+Usage
+-----
 
 
         Usage of ./reposam/reposam:

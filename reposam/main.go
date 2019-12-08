@@ -163,7 +163,7 @@ func main() {
 		reposam.SetAccessListType(config.AccessListType),
 		reposam.SetAccessList(config.AccessList),
 		//
-		reposam.SetWatchDir(*outRoot),
+		reposam.SetWatchDir(*inRoot),
 		reposam.SetServeDir(*outRoot),
 		reposam.SetGenContents(*generateContents),
 		reposam.SetMaintainerOverride(*maintainerOverride),

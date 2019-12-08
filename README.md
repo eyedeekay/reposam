@@ -38,13 +38,13 @@ Usage
               generate a web interface for browsing the packages
          -i	save i2p keys(and thus destinations) across reboots (default true)
          -ib int
-              Set inbound tunnel backup quantity(0 to 5) (default 1)
+              Set inbound tunnel backup quantity(0 to 5) (default 2)
          -id string
               directory to look for packages (default "not_a_dir")
          -il int
-              Set inbound tunnel length(0 to 7) (default 3)
+              Set inbound tunnel length(0 to 7) (default 2)
          -iq int
-              Set inbound tunnel quantity(0 to 15) (default 2)
+              Set inbound tunnel quantity(0 to 15) (default 4)
          -iv int
               Set inbound tunnel length variance(-7 to 7)
          -key string
@@ -58,19 +58,19 @@ Usage
          -n string
               name to give the tunnel(default reposam) (default "reposam")
          -ob int
-              Set outbound tunnel backup quantity(0 to 5) (default 1)
+              Set outbound tunnel backup quantity(0 to 5) (default 2)
          -od string
               directory to output the repository (default "not_a_dir")
          -ol int
-              Set outbound tunnel length(0 to 7) (default 3)
+              Set outbound tunnel length(0 to 7) (default 2)
          -oq int
-              Set outbound tunnel quantity(0 to 15) (default 2)
+              Set outbound tunnel quantity(0 to 15) (default 4)
          -or string
               sets the origin field used in the Release file (default "reposam")
          -ov int
               Set outbound tunnel length variance(-7 to 7)
          -p string
-              port to serve locally on (default "7880")
+              port to serve locally on (default "7888")
          -r	Reduce tunnel quantity when idle(true or false)
          -rc int
               Reduce idle tunnel quantity to X (0 to 5) (default 3)

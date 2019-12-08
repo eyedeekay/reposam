@@ -59,19 +59,23 @@ func (f *RepoSam) ServeParent() {
 	}
 }
 
+func (f *RepoSam) ServeRepo() {
+	if err := f.Repo.ServeRepo(f.watch, true, f.privateKey, f.inRoot, f.outRoot, f.watchInterval); err != nil {
+		f.Cleanup()
+	}
+}
+
 //Serve starts the SAM connection and and forwards the local host:port to i2p
 func (f *RepoSam) Serve() error {
 	go f.ServeParent()
 	if f.Up() {
-		if err := f.Repo.ServeRepo(f.watch, true, f.privateKey, f.inRoot, f.outRoot, f.watchInterval); err != nil {
-			return err
-		}
+		go f.ServeRepo()
 		fs := http.FileServer(http.Dir(f.outRoot))
 		http.Handle("/", fs)
-        log.Println("Forwarding repo hosted at", f.Target())
+		log.Println("Forwarding repo hosted at", f.Target())
 		if err := http.ListenAndServe(f.Target(), nil); err != nil {
-            return err
-        }
+			return err
+		}
 	}
 	return nil
 }

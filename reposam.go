@@ -63,12 +63,14 @@ func (f *RepoSam) ServeParent() {
 func (f *RepoSam) Serve() error {
 	go f.ServeParent()
 	if f.Up() {
-		if err = f.Repo.ServeRepo(f.watch, true, f.privateKey, f.inRoot, f.outRoot, f.watchInterval); err != nil {
+		if err := f.Repo.ServeRepo(f.watch, true, f.privateKey, f.inRoot, f.outRoot, f.watchInterval); err != nil {
 			return err
 		}
 		fs := http.FileServer(http.Dir(f.outRoot))
 		http.Handle("/", fs)
-		http.ListenAndServe(f.Target(), nil)
+		if err := http.ListenAndServe(f.Target(), nil); err != nil {
+            return err
+        }
 	}
 	return nil
 }

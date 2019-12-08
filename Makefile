@@ -1,4 +1,5 @@
 
+-include ../config.mk
 
 GO111MODULE=on
 VERSION=0.0.1
@@ -11,7 +12,7 @@ build: fmt readme
 		-o reposam/reposam ./reposam
 
 try: build
-	cd tmp && ../reposam/reposam
+	cd tmp && ../reposam/reposam -wa -il 1 -ol 1 -key $(PRIVATE_KEY) -id $(DEB_PKG) -od $(DEB_REPO)
 
 readme:
 	sed 's|See README.md||g' .readme.md > README.md

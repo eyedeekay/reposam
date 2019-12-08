@@ -68,6 +68,7 @@ func (f *RepoSam) Serve() error {
 		}
 		fs := http.FileServer(http.Dir(f.outRoot))
 		http.Handle("/", fs)
+        log.Println("Forwarding repo hosted at", f.Target())
 		if err := http.ListenAndServe(f.Target(), nil); err != nil {
             return err
         }
